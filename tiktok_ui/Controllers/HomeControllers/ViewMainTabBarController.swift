@@ -20,7 +20,32 @@ class ViewMainTabBarController: UITabBarController {
         } else {
             // Fallback on earlier versions
         }
+        self.delegate = self
+    }
+}
+
+extension ViewMainTabBarController: UITabBarControllerDelegate{
+    // UITabBarDelegate
+    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        print("Selected item : \(item)")
+        let tabBar = item.title
+        if tabBar != "Home" {
+            let appearance = UITabBarAppearance()
+            appearance.configureWithOpaqueBackground()
+            appearance.backgroundColor = .white
+            self.tabBar.standardAppearance = appearance
+            self.tabBar.tintColor = .black
+        }else{
+            let appearance = UITabBarAppearance()
+            appearance.configureWithOpaqueBackground()
+            appearance.backgroundColor = .black
+            self.tabBar.standardAppearance = appearance
+            self.tabBar.tintColor = .white
+        }
     }
 
-
+    // UITabBarControllerDelegate
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        print("Selected view controller")
+    }
 }
